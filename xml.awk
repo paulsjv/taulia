@@ -30,7 +30,7 @@ NR != 1 {
 
 	#// invoice image
 	fileName = $3"_"$2"_"$8;
-	saveImage = "./"$3"/"fileName;
+	saveImage = fileName;
 	print $7 > saveImage;
 	close(saveImage);
 
