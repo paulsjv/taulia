@@ -17,22 +17,23 @@ NR == 1 {
 }
 
 NR != 1 {
-	print "<buyer>";
-	print "<"id">"$1"</"id">";
-	print "<"invoice_number">"$2"</"invoice_number">";
-	print "<"buyer">"$3"</"buyer">";
-	print "<"amount1">"$4"</"amount1">";
-	print "<"currency">"$5"</"currency">";
-	print "<"purchase_order">"$6"</"purchase_order">";
-	print "<"image_name">"$8"</"image_name">";
-	print "<"item_number">"$9"</"item_number">";
-	print "<"amount2">"$10"</"amount2">";
-	print "<"quantity">"$11"</"quantity">";
-	print "</buyer>";
+	if ( system("test -d" $3) == 0) {
+		#print buyer " does not exist.";
+		system("mkdir ./" $3);
+	}
+
+	xml = "<buyer><"id">"$1"</"id"><"invoice_number">"$2"</"invoice_number"><"buyer">"$3"</"buyer"><"amount1">"$4"</"amount1"><"currency">"$5"</"currency"><"purchase_order">"$6"</"purchase_order"><"image_name">"$8"</"image_name"><"item_number">"$9"</"item_number"><"amount2">"$10"</"amount2"><"quantity">"$11"</"quantity"></buyer>";
+
+	saveXml = "./"$3"/buyer-"NR;
+	print xml > saveXml;
+	close(saveXml);
 
 	#// invoice image
-	filename = $3"_"$2"_"$8;
-	print $7 > filename;
+	fileName = $3"_"$2"_"$8;
+	saveImage = "./"$3"/"fileName;
+	print $7 > saveImage;
+	close(saveImage);
+
 
 }
 
