@@ -17,9 +17,11 @@ NR == 1 {
 }
 
 NR != 1 {
-	if ( system("test -d" $3) == 0) {
-		#print buyer " does not exist.";
-		system("mkdir ./" $3);
+	testCmd = "test -d "$3;
+	if (system(testCmd) != 0) {
+		makeDir = "mkdir ./"$3;
+		system(makeDir);
+		close(makeDir);
 	}
 
 	xml = "<buyer><"id">"$1"</"id"><"invoice_number">"$2"</"invoice_number"><"buyer">"$3"</"buyer"><"amount1">"$4"</"amount1"><"currency">"$5"</"currency"><"purchase_order">"$6"</"purchase_order"><"image_name">"$8"</"image_name"><"item_number">"$9"</"item_number"><"amount2">"$10"</"amount2"><"quantity">"$11"</"quantity"></buyer>";
@@ -33,8 +35,6 @@ NR != 1 {
 	saveImage = fileName;
 	print $7 > saveImage;
 	close(saveImage);
-
-
 }
 
 END {

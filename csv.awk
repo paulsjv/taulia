@@ -7,10 +7,14 @@ NR == 1 {
 }
 
 NR != 1 {
-	if ( system("test -d" $3) == 0) {
-		system("mkdir ./" $3);
+	testCmd = "test -d "$3;
+	if ( system(testCmd) != 0) {
+		makeDir = "mkdir ./"$3;
+		system(makeDir);
+		close(makeDir);
 		lineOne = $3"/aaalineOne"
 		print csvLineOne > lineOne;
+		close(lineOne);
 	}
 
 	csv = $1","$2","$3","$4","$5","$6","$7","$8","$9","$10","$11;

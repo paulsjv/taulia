@@ -1,5 +1,6 @@
-#! /bin/bash
-echo "List of files:"
+#!/bin/bash
+date
+echo "===================================="
 awk -f xml.awk loadData_small.csv
 
 DIRS=./*
@@ -11,7 +12,6 @@ do
 		fileNames=$(ls -p ./$d)
 		for f in $fileNames
 		do
-			echo "$d/$f"
 			xml=$(cat $d/$f)
 			buyer="$buyer$xml"
 		done
@@ -20,3 +20,4 @@ do
 done
 buyer="$buyer</buyers>"
 echo "$buyer" > "buyers.xml"
+date
