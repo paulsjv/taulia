@@ -1,5 +1,6 @@
 #! /bin/bash
 echo "List of files:"
+awk -f xml.awk loadData_small.csv
 
 DIRS=./*
 
@@ -16,5 +17,6 @@ do
 		done
 		buyer="$buyer</buyers>"
 		echo "$buyer" > "$d.xml"
+		rm -R $d
 	fi
 done
