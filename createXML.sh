@@ -4,10 +4,10 @@ awk -f xml.awk loadData_small.csv
 
 DIRS=./*
 
+buyer="<buyers>"
 for d in $DIRS
 do
 	if [ -d "$d" ]; then
-		buyer="<buyers>"
 		fileNames=$(ls -p ./$d)
 		for f in $fileNames
 		do
@@ -15,8 +15,8 @@ do
 			xml=$(cat $d/$f)
 			buyer="$buyer$xml"
 		done
-		buyer="$buyer</buyers>"
-		echo "$buyer" > "$d.xml"
 		rm -R $d
 	fi
 done
+buyer="$buyer</buyers>"
+echo "$buyer" > "buyers.xml"
