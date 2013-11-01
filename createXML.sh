@@ -1,5 +1,6 @@
 #!/bin/bash
-date
+startTime=$(date)
+echo $startTime
 echo "===================================="
 awk -f xml.awk loadData_small.csv
 
@@ -19,4 +20,5 @@ do
 	fi
 done
 echo "</buyers>" >> "buyers.xml"
-date
+echo "Start Time: " $startTime
+echo "End Time: " $(date)
