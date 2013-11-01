@@ -8,21 +8,18 @@ DIRS=./*
 for d in $DIRS
 do
 	if [ -d "$d" ]; then
-		buyer=""
 		count=1
 		fileNames=$(ls -p ./$d)
 		for f in $fileNames
 		do
 			xml=$(cat $d/$f)
 			if [ "$count" -eq 1 ]; then
-				buyer="$xml"
+				echo "$xml" >> "$d.csv"
 			else
-				buyer="$buyer\n$xml"
+				echo -e "\n$xml" >> "$d.csv"
 			fi
 			count=$(expr $count + 1)
 		done
-		buyer="$buyer"
-		echo -e "$buyer" > "$d.csv"
 		rm -R $d
 	fi
 done
