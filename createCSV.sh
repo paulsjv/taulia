@@ -17,7 +17,7 @@ do
 			if [ "$count" -eq 1 ]; then
 				echo "$xml" >> "$d.csv"
 			else
-				echo -e "\n$xml" >> "$d.csv"
+				echo -e "$xml" >> "$d.csv"
 			fi
 			count=$(expr $count + 1)
 		done
