@@ -2,7 +2,7 @@
 startTime=$(date)
 echo $startTime
 echo "===================================="
-awk -f csv.awk loadData.csv
+awk -f csv.awk loadData_small.csv
 
 DIRS=./*
 
